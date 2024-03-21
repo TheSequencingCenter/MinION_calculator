@@ -42,21 +42,16 @@ def minion_sequencing_calculator() -> Dict[str, float | str]:
 
     # Calculate number of hours to run sequencer
     total_hours: float = round(number_of_reads / reads_per_hour, 1)
-    
-    # Prepare the result as a dictionary
-    result: Dict[str, float | str] = {
-        "Estimated run time (hours)": total_hours
-    }
+    result_str: str = f"Estimated run time (hours): {total_hours}"
     
     # Check if the required time exceeds the maximum run time
     if total_hours > max_run_hours:
         logger.warning("Warning: the desired coverage requires more time than the maximum run time of the MinION flowcell.")
     
-    return result
+    return result_str
 
 if __name__ == "__main__":
     
     # print results
-    results: Dict[str, float | str] = minion_sequencing_calculator()
-    for key, value in results.items():
-        print(f"{key}: {value}")
+    result_str: str = minion_sequencing_calculator()
+    print(result_str)
